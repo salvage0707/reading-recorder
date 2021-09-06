@@ -1,22 +1,66 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="list">
+    <p>{{ bookCount }}件の読書情報が記録されています。</p>
+    <BookInfo
+        v-for="(b, i) of state.books"
+        :linkable="true"
+        :book="b"
+        :index="i + 1"
+        :key="b.id"
+    ></BookInfo>
+    <div>
+      <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="bookCount"
+          :page-size="3"
+          @current-change="onchange"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import {Options, Vue} from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import {computed, defineComponent, reactive} from 'vue'
+import Book from "@/modules/Book";
+import BookInfo from '@/components/BookInfo.vue';
+import {useStore} from "@/store";
 
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class Home extends Vue {
-  created() {
-    this.$store.commit('updateBook', "hoge");
-  }
+type State = {
+  books: Book[],
 }
+
+const Home = defineComponent({
+  name: 'home',
+  components: {
+    BookInfo,
+  },
+  setup() {
+    // store
+    const store = useStore();
+
+    // state
+    const state = reactive<State>({
+      books: []
+    });
+
+    // computed
+    const bookCount = computed<number>(() => store.getters.bookCount);
+    const getRangeByPage = (page: number) => store.getters.getRangeByPage(page);
+
+    // methods
+    const onchange = (page: number) => {
+      state.books = getRangeByPage(page);
+    }
+
+    return {
+      bookCount,
+      onchange,
+      store,
+      state,
+    }
+  }
+})
+
+export default Home;
 </script>

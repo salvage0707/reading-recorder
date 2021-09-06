@@ -15,13 +15,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from 'vue'
 import {mapActions} from 'vuex'
-import {UPDATE_CURRENT} from "../store/mutation-types";
+import {UPDATE_CURRENT} from "@/store/mutation-types";
 import Book from "../modules/Book";
 
-export default defineComponent({
+const BookInfo = defineComponent({
   name: 'book-info',
   props: {
     index: {
@@ -45,6 +45,8 @@ export default defineComponent({
     }
   }
 })
+
+export default BookInfo;
 </script>
 
 <style scoped>

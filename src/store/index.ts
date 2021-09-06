@@ -1,5 +1,5 @@
 import {InjectionKey} from 'vue';
-import {createStore, Store} from 'vuex';
+import {createStore, Store, useStore as baseUseStore} from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import Book from '@/modules/Book';
 import {UPDATE_BOOK, UPDATE_CURRENT} from './mutation-types';
@@ -86,3 +86,7 @@ export const store = createStore<State>({
         }),
     ],
 });
+
+export function useStore() {
+    return baseUseStore(key);
+}
