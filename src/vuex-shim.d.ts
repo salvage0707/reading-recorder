@@ -1,4 +1,4 @@
-import { Store } from 'vuex';
+import {Store} from 'vuex';
 import Book from '@/modules/Book';
 
 declare module '@vue/runtime-core' {

@@ -9,5 +9,6 @@ export default class Book {
         public publisher?: string,
         public published?: Date,
         public image?: string,
-    ) {}
+    ) {
+    }
 }
