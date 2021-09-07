@@ -24,7 +24,7 @@ interface CustomStoreOptions {
     };
 }
 
-export const key: InjectionKey<Store<State>> = Symbol();
+export const storeKey: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
     strict: true,
@@ -88,5 +88,5 @@ export const store = createStore<State>({
 });
 
 export function useStore() {
-    return baseUseStore(key);
+    return baseUseStore(storeKey);
 }

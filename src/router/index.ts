@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 import Home from '../views/Home.vue';
+import BookSearch from '../views/BookSearch.vue';
 
 const routes: RouteRecordRaw[] = [
     {
@@ -7,11 +8,11 @@ const routes: RouteRecordRaw[] = [
         name: 'Home',
         component: Home,
     },
-    // {
-    //   path: 'search',
-    //   name: 'search',
-    //   component: BookSearch,
-    // },
+    {
+      path: '/search',
+      name: 'search',
+      component: BookSearch,
+    },
     // {
     //   path: '/form',
     //   name: 'form',

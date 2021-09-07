@@ -10,5 +10,7 @@ declare module '@vue/runtime-core' {
 
     interface ComponentCustomProperties {
         $store: Store<State>;
+        // $http:
+        // $http: fetch;
     }
 }
