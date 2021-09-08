@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "tslint": "tslint --fix src/**/*.ts src/*.ts tests/**/*.ts"
   },
   "dependencies": {
     "axios": "^0.21.4",
@@ -41,6 +42,12 @@
   ],
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest/presets/typescript-and-babel",
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "json",
+      "vue"
+    ],
     "transform": {
       "^.+\\.vue$": "vue-jest"
     }

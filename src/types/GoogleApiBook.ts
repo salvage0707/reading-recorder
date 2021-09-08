@@ -3,6 +3,7 @@ export interface GoogleApiBook {
     totalItems: number;
     items?: (ItemsEntity)[] | null;
 }
+
 export interface ItemsEntity {
     kind: string;
     id: string;
@@ -13,6 +14,7 @@ export interface ItemsEntity {
     accessInfo: AccessInfo;
     searchInfo?: SearchInfo | null;
 }
+
 export interface VolumeInfo {
     title: string;
     authors?: (string)[] | null;
@@ -35,22 +37,27 @@ export interface VolumeInfo {
     canonicalVolumeLink: string;
     subtitle?: string | null;
 }
+
 export interface IndustryIdentifiersEntity {
     type: string;
     identifier: string;
 }
+
 export interface ReadingModes {
     text: boolean;
     image: boolean;
 }
+
 export interface PanelizationSummary {
     containsEpubBubbles: boolean;
     containsImageBubbles: boolean;
 }
+
 export interface ImageLinks {
     smallThumbnail: string;
     thumbnail: string;
 }
+
 export interface SaleInfo {
     country: string;
     saleability: string;
@@ -60,23 +67,28 @@ export interface SaleInfo {
     buyLink?: string | null;
     offers?: (OffersEntity)[] | null;
 }
+
 export interface ListPriceOrRetailPrice {
     amount: number;
     currencyCode: string;
 }
+
 export interface ListPriceOrRetailPrice1 {
     amount: number;
     currencyCode: string;
 }
+
 export interface OffersEntity {
     finskyOfferType: number;
     listPrice: ListPriceOrRetailPrice2;
     retailPrice: ListPriceOrRetailPrice2;
 }
+
 export interface ListPriceOrRetailPrice2 {
     amountInMicros: number;
     currencyCode: string;
 }
+
 export interface AccessInfo {
     country: string;
     viewability: string;
@@ -89,10 +101,12 @@ export interface AccessInfo {
     accessViewStatus: string;
     quoteSharingAllowed: boolean;
 }
+
 export interface PdfOrEpub {
     isAvailable: boolean;
     acsTokenLink?: string | null;
 }
+
 export interface SearchInfo {
     textSnippet: string;
 }

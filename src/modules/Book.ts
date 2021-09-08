@@ -32,6 +32,7 @@ export default class Book {
             imageUrl,
         );
     }
+
     constructor(
         public id?: string,
         public title?: string,

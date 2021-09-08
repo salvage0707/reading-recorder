@@ -1,7 +1,7 @@
 <template>
-  <div class="clearfix" :class="{ linkable }" @click="onclick">
+  <div :class="{ linkable }" class="clearfix" @click="onclick">
     <div class="image">
-      <img alt="book_image" :src="book.image"/>
+      <img :src="book.image" alt="book_image"/>
     </div>
     <div class="details">
       <ul>
@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from 'vue'
-import {mapActions} from 'vuex'
-import {UPDATE_CURRENT} from "@/store/mutation-types";
-import Book from "../modules/Book";
+import {defineComponent, PropType} from 'vue';
+import {mapActions} from 'vuex';
+import {UPDATE_CURRENT} from '@/store/mutation-types';
+import Book from '../modules/Book';
 
 const BookInfo = defineComponent({
   name: 'book-info',
@@ -61,7 +61,7 @@ export default BookInfo;
 }
 
 .image {
-  float:left;
+  float: left;
 }
 
 .image img {

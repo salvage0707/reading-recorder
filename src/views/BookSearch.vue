@@ -1,39 +1,40 @@
 <template>
-<div id="search">
-  <el-form :inline="true">
-    <el-form-item label="キーワード">
-      <el-input
-          type="text"
-          size="large"
-          v-model="state.keyword"
-      ></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button
-        type="primary"
-        @click="onclick"
-      >
-        検索
-      </el-button>
-    </el-form-item>
-  </el-form>
-  <hr/>
+  <div id="search">
+    <el-form :inline="true">
+      <el-form-item label="キーワード">
+        <el-input
+            v-model="state.keyword"
+            size="large"
+            type="text"
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+            type="primary"
+            @click="onclick"
+        >
+          検索
+        </el-button>
+      </el-form-item>
+    </el-form>
+    <hr/>
 
-  <BookInfo
-      v-for="(b, i) of state.books"
-      :book="b"
-      :index="i + 1"
-      :key="b.id"
-  ></BookInfo>
-</div>
+    <BookInfo
+        v-for="(b, i) of state.books"
+        :key="b.id"
+        :book="b"
+        :index="i + 1"
+    ></BookInfo>
+  </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, inject, reactive} from 'vue'
-import Book from "@/modules/Book";
+import {defineComponent, inject, reactive} from 'vue';
+import Book from '@/modules/Book';
 import BookInfo from '@/components/BookInfo.vue';
-import {GoogleApiBook} from "@/types/GoogleApiBook";
+import {GoogleApiBook} from '@/types/GoogleApiBook';
 import {httpKey} from '@/injectkeys/httpkey';
+import GoogleApiResponseError from '@/types/GoogleApiResponseError';
 
 type State = {
   keyword: string,
@@ -47,7 +48,7 @@ const BookSearch = defineComponent({
   },
   setup() {
     // state
-    const state =  reactive<State>({
+    const state = reactive<State>({
       keyword: 'vue.js',
       books: []
     });
@@ -64,18 +65,22 @@ const BookSearch = defineComponent({
       http.get(
           'https://www.googleapis.com/books/v1/volumes?q=' + state.keyword
       )
-      .then((result) => {
-        const data: GoogleApiBook = result.data;
-        state.books = []
-        if (!data.items) {
-          return;
-        }
-        for (let b of data.items) {
-          state.books.push(
-            Book.constructorFromGoogleApiBook(b)
-          )
-        }
-      })
+          .then((result) => {
+            state.books = [];
+            if (result.status != 200) {
+              throw new GoogleApiResponseError('status is not 200. status=' + result.status);
+            }
+
+            const data: GoogleApiBook = result.data;
+            if (!data.items) {
+              return;
+            }
+            for (let b of data.items) {
+              state.books.push(
+                  Book.constructorFromGoogleApiBook(b)
+              );
+            }
+          });
     }
 
     return {

@@ -3,10 +3,10 @@
     <h2>Reading Recorder</h2>
     <!-- メインメニューを定義 -->
     <el-menu
-        mode="horizontal"
-        background-color="#545c64"
-        text-color="#fff"
         active-text-color="#ffd04b"
+        background-color="#545c64"
+        mode="horizontal"
+        text-color="#fff"
     >
       <el-menu-item index="1">
         <router-link to="/">Home</router-link>
@@ -15,7 +15,7 @@
         <router-link to="/search">Search</router-link>
       </el-menu-item>
       <el-sub-menu index="3">
-<!--        <template>Support</template>-->
+        <!--        <template>Support</template>-->
         <el-menu-item index="3-1">
           <a href="https://wings.msn.to/" target="help">Author</a>
         </el-menu-item>
@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent} from 'vue';
 
 export default defineComponent({
   name: 'app',
