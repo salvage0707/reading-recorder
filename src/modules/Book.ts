@@ -1,18 +1,19 @@
 import Price from '@/modules/Price';
 import {ItemsEntity} from '@/types/GoogleApiBook';
+import BookRecord from '@/modules/BookRecord';
 
 export default class Book {
 
     public static constructorFromGoogleApiBook(googleApiBook: ItemsEntity) {
         // authors
         const authors = googleApiBook.volumeInfo.authors;
-        const joindAuthors = authors ? authors.join(',') : '';
+        const joinedAuthors = authors ? authors.join(',') : '';
         // price
         let price: Price | undefined;
         if (googleApiBook.saleInfo.listPrice) {
             price = new Price(
-                googleApiBook.saleInfo.listPrice.amount,
-                googleApiBook.saleInfo.listPrice.currencyCode,
+              googleApiBook.saleInfo.listPrice.amount,
+              googleApiBook.saleInfo.listPrice.currencyCode,
             );
         }
         // publisher
@@ -23,24 +24,26 @@ export default class Book {
         const image = googleApiBook.volumeInfo.imageLinks;
         const imageUrl = image ? image.smallThumbnail : '';
         return new Book(
-            googleApiBook.id,
-            googleApiBook.volumeInfo.title,
-            joindAuthors,
-            price,
-            publisher,
-            publishedDate,
-            imageUrl,
+          googleApiBook.id,
+          googleApiBook.volumeInfo.title,
+          joinedAuthors,
+          price,
+          publisher,
+          publishedDate,
+          imageUrl,
         );
     }
 
     constructor(
-        public id?: string,
-        public title?: string,
-        public author?: string,
-        public price?: Price,
-        public publisher?: string,
-        public published?: Date,
-        public image?: string,
+      public id?: string,
+      public title?: string,
+      public author?: string,
+      public price?: Price,
+      public publisher?: string,
+      public published?: Date,
+      public image?: string,
+      public record?: BookRecord,
     ) {
     }
+
 }

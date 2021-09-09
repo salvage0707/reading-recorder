@@ -10,7 +10,7 @@ import {http, httpKey} from '@/injectkeys/httpkey';
 const app = createApp(App);
 
 app.config.globalProperties.$http =
-    (input: RequestInfo, init?: RequestInit | undefined) => fetch(input, init);
+  (input: RequestInfo, init?: RequestInit | undefined) => fetch(input, init);
 
 app.use(store, storeKey);
 app.use(router);

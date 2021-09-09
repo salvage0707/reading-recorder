@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, reactive} from 'vue';
+import {computed, defineComponent, onMounted, reactive} from 'vue';
 import Book from '@/modules/Book';
 import BookInfo from '@/components/BookInfo.vue';
 import {useStore} from '@/store';
@@ -51,16 +51,21 @@ const Home = defineComponent({
     // methods
     const onchange = (page: number) => {
       state.books = getRangeByPage(page);
-    }
+    };
+
+    // mounted
+    onMounted(() => {
+      state.books = getRangeByPage(1);
+    });
 
     return {
       bookCount,
       onchange,
       store,
       state,
-    }
+    };
   }
-})
+});
 
 export default Home;
 </script>

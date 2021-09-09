@@ -3,7 +3,7 @@
     <el-form :inline="true">
       <el-form-item label="キーワード">
         <el-input
-            v-model="state.keyword"
+            v-model="data.keyword"
             size="large"
             type="text"
         ></el-input>
@@ -20,10 +20,11 @@
     <hr/>
 
     <BookInfo
-        v-for="(b, i) of state.books"
+        v-for="(b, i) of data.books"
         :key="b.id"
         :book="b"
         :index="i + 1"
+        :linkable="true"
     ></BookInfo>
   </div>
 </template>
@@ -47,8 +48,8 @@ const BookSearch = defineComponent({
     BookInfo,
   },
   setup() {
-    // state
-    const state = reactive<State>({
+    // data
+    const data = reactive<State>({
       keyword: 'vue.js',
       books: []
     });
@@ -63,33 +64,33 @@ const BookSearch = defineComponent({
     // methods
     const onclick = () => {
       http.get(
-          'https://www.googleapis.com/books/v1/volumes?q=' + state.keyword
+          'https://www.googleapis.com/books/v1/volumes?q=' + data.keyword
       )
           .then((result) => {
-            state.books = [];
+            data.books = [];
             if (result.status != 200) {
               throw new GoogleApiResponseError('status is not 200. status=' + result.status);
             }
 
-            const data: GoogleApiBook = result.data;
-            if (!data.items) {
+            const body: GoogleApiBook = result.data;
+            if (!body.items) {
               return;
             }
-            for (let b of data.items) {
-              state.books.push(
+            for (let b of body.items) {
+              data.books.push(
                   Book.constructorFromGoogleApiBook(b)
               );
             }
           });
-    }
+    };
 
     return {
-      state,
+      data,
       onclick,
-    }
+    };
   }
 
-})
+});
 
 export default BookSearch;
 </script>

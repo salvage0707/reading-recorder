@@ -49,7 +49,7 @@ const BookInfo = defineComponent({
       }
     }
   }
-})
+});
 
 export default BookInfo;
 </script>
